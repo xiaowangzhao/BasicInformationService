@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.ApiParamRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.ApiParamRelation" >
+    <id column="paramno" property="paramno" jdbcType="VARCHAR" />
+    <result column="paramname" property="paramname" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="apiin" property="apiin" jdbcType="VARCHAR" />
+    <result column="next" property="next" jdbcType="VARCHAR" />
+    <result column="apiout" property="apiout" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from api_param_relation
+    where paramno = #{paramno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.ApiParamRelation" >
+    insert into api_param_relation (paramno, paramname, type, 
+      apiin, next, apiout
+      )
+    values (#{paramno,jdbcType=VARCHAR}, #{paramname,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{apiin,jdbcType=VARCHAR}, #{next,jdbcType=VARCHAR}, #{apiout,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.ApiParamRelation" >
+    update api_param_relation
+    set paramname = #{paramname,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      apiin = #{apiin,jdbcType=VARCHAR},
+      next = #{next,jdbcType=VARCHAR},
+      apiout = #{apiout,jdbcType=VARCHAR}
+    where paramno = #{paramno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select paramno, paramname, type, apiin, next, apiout
+    from api_param_relation
+    where paramno = #{paramno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select paramno, paramname, type, apiin, next, apiout
+    from api_param_relation
+  </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.VisitingscholarMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Visitingscholar" >
+    <id column="tno" property="tno" jdbcType="VARCHAR" />
+    <result column="Vtype" property="vtype" jdbcType="VARCHAR" />
+    <result column="Vstudy" property="vstudy" jdbcType="VARCHAR" />
+    <result column="Vend" property="vend" jdbcType="VARCHAR" />
+    <result column="Vtime" property="vtime" jdbcType="VARCHAR" />
+    <result column="scno" property="scno" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from visitingscholar
+    where tno = #{tno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Visitingscholar" >
+    insert into visitingscholar (tno, Vtype, Vstudy, 
+      Vend, Vtime, scno)
+    values (#{tno,jdbcType=VARCHAR}, #{vtype,jdbcType=VARCHAR}, #{vstudy,jdbcType=VARCHAR}, 
+      #{vend,jdbcType=VARCHAR}, #{vtime,jdbcType=VARCHAR}, #{scno,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Visitingscholar" >
+    update visitingscholar
+    set Vtype = #{vtype,jdbcType=VARCHAR},
+      Vstudy = #{vstudy,jdbcType=VARCHAR},
+      Vend = #{vend,jdbcType=VARCHAR},
+      Vtime = #{vtime,jdbcType=VARCHAR},
+      scno = #{scno,jdbcType=VARCHAR}
+    where tno = #{tno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select tno, Vtype, Vstudy, Vend, Vtime, scno
+    from visitingscholar
+    where tno = #{tno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select tno, Vtype, Vstudy, Vend, Vtime, scno
+    from visitingscholar
+  </select>
+</mapper>

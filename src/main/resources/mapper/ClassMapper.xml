@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.ClassMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Class" >
+    <id column="classname" property="classname" jdbcType="VARCHAR" />
+    <result column="specid" property="specid" jdbcType="CHAR" />
+    <result column="tno" property="tno" jdbcType="VARCHAR" />
+    <result column="start" property="start" jdbcType="CHAR" />
+    <result column="end" property="end" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from class
+    where classname = #{classname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Class" >
+    insert into class (classname, specid, tno,
+      start, end)
+    values (#{classname,jdbcType=VARCHAR}, #{specid,jdbcType=CHAR}, #{tno,jdbcType=VARCHAR},
+      #{start,jdbcType=CHAR}, #{end,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Class" >
+    update class
+    set specid = #{specid,jdbcType=CHAR},
+      tno = #{tno,jdbcType=VARCHAR},
+      start = #{start,jdbcType=CHAR},
+      end = #{end,jdbcType=CHAR}
+    where classname = #{classname,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select classname, specid, tno, start, end
+    from class
+    where classname = #{classname,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select classname, specid, tno, start, end
+    from class
+  </select>
+</mapper>

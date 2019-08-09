@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.ApiMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Api" >
+    <id column="apino" property="apino" jdbcType="INTEGER" />
+    <result column="apiname" property="apiname" jdbcType="VARCHAR" />
+    <result column="apiurl" property="apiurl" jdbcType="VARCHAR" />
+    <result column="apireturnform" property="apireturnform" jdbcType="VARCHAR" />
+    <result column="apiremark" property="apiremark" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="jsonexample" property="jsonexample" jdbcType="LONGVARCHAR" />
+    <result column="codeexample" property="codeexample" jdbcType="LONGVARCHAR" />
+    <result column="wrongcodeexample" property="wrongcodeexample" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from api
+    where apino = #{apino,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Api" >
+    insert into api (apino, apiname, apiurl, 
+      apireturnform, apiremark, tags, 
+      jsonexample, codeexample, wrongcodeexample
+      )
+    values (#{apino,jdbcType=INTEGER}, #{apiname,jdbcType=VARCHAR}, #{apiurl,jdbcType=VARCHAR}, 
+      #{apireturnform,jdbcType=VARCHAR}, #{apiremark,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{jsonexample,jdbcType=LONGVARCHAR}, #{codeexample,jdbcType=LONGVARCHAR}, #{wrongcodeexample,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Api" >
+    update api
+    set apiname = #{apiname,jdbcType=VARCHAR},
+      apiurl = #{apiurl,jdbcType=VARCHAR},
+      apireturnform = #{apireturnform,jdbcType=VARCHAR},
+      apiremark = #{apiremark,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      jsonexample = #{jsonexample,jdbcType=LONGVARCHAR},
+      codeexample = #{codeexample,jdbcType=LONGVARCHAR},
+      wrongcodeexample = #{wrongcodeexample,jdbcType=LONGVARCHAR}
+    where apino = #{apino,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select apino, apiname, apiurl, apireturnform, apiremark, tags, jsonexample, codeexample, 
+    wrongcodeexample
+    from api
+    where apino = #{apino,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select apino, apiname, apiurl, apireturnform, apiremark, tags, jsonexample, codeexample, 
+    wrongcodeexample
+    from api
+  </select>
+</mapper>

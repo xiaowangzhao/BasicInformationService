@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.ApiparamMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Apiparam" >
+    <id column="paramname" property="paramname" jdbcType="VARCHAR" />
+    <result column="apino" property="apino" jdbcType="INTEGER" />
+    <result column="paramnecessary" property="paramnecessary" jdbcType="VARCHAR" />
+    <result column="paramformat" property="paramformat" jdbcType="VARCHAR" />
+    <result column="paramremark" property="paramremark" jdbcType="VARCHAR" />
+    <result column="paramtype" property="paramtype" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from apiparam
+    where paramname = #{paramname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Apiparam" >
+    insert into apiparam (paramname, apino, paramnecessary, 
+      paramformat, paramremark, paramtype
+      )
+    values (#{paramname,jdbcType=VARCHAR}, #{apino,jdbcType=INTEGER}, #{paramnecessary,jdbcType=VARCHAR}, 
+      #{paramformat,jdbcType=VARCHAR}, #{paramremark,jdbcType=VARCHAR}, #{paramtype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Apiparam" >
+    update apiparam
+    set apino = #{apino,jdbcType=INTEGER},
+      paramnecessary = #{paramnecessary,jdbcType=VARCHAR},
+      paramformat = #{paramformat,jdbcType=VARCHAR},
+      paramremark = #{paramremark,jdbcType=VARCHAR},
+      paramtype = #{paramtype,jdbcType=VARCHAR}
+    where paramname = #{paramname,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select paramname, apino, paramnecessary, paramformat, paramremark, paramtype
+    from apiparam
+    where paramname = #{paramname,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select paramname, apino, paramnecessary, paramformat, paramremark, paramtype
+    from apiparam
+  </select>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry
+            location="C:/Users/liangqingfeng/.m2/repository/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar" />
+    <context id="mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!--beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号；-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/studentwebserver?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root" password="" />
+        <!--实体生成路径 -->
+        <javaModelGenerator targetPackage="com.sdjzu.basicinformationservice.entity"
+                            targetProject="src/main/java" >
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        </javaModelGenerator>
+        <!--mapper文件生成路径 -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources" />
+        <!--dao层生成路径 -->
+        <javaClientGenerator targetPackage="com.sdjzu.basicinformationservice.dao"
+                             targetProject="src/main/java" type="XMLMAPPER" />
+
+        <table schema="studentwebserver" tableName="api" />
+        <table schema="studentwebserver" tableName="api_param_relation" />
+        <table schema="studentwebserver" tableName="apiparam" />
+        <table schema="studentwebserver" tableName="class" />
+        <table schema="studentwebserver" tableName="clinent" />
+        <table schema="studentwebserver" tableName="readingdoctor" />
+        <table schema="studentwebserver" tableName="role" />
+        <table schema="studentwebserver" tableName="role_user_mapping" />
+        <table schema="studentwebserver" tableName="school" />
+        <table schema="studentwebserver" tableName="speciality" />
+        <table schema="studentwebserver" tableName="student" />
+        <table schema="studentwebserver" tableName="sycode" />
+        <table schema="studentwebserver" tableName="tdegree" />
+        <table schema="studentwebserver" tableName="teacher" />
+        <table schema="studentwebserver" tableName="user" />
+        <table schema="studentwebserver" tableName="visitingscholar" />
+    </context>
+</generatorConfiguration>

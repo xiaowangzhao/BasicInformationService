@@ -1,0 +1,19 @@
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      url: jdbc:mysql://localhost:3306/studentwebserver?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+
+# 集成Mybatis
+mybatis:
+   # Mybatis映射
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sdjzu.basicinformationservice.entity
+
+# 端口设置
+server:
+  port: 8089
+
+
+

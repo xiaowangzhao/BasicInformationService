@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.User" >
+    <id column="UserId" property="userid" jdbcType="VARCHAR" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="userMailAddress" property="usermailaddress" jdbcType="VARCHAR" />
+    <result column="userPIN" property="userpin" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="IsEnabled" property="isenabled" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where UserId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.User" >
+    insert into user (UserId, UserName, Password, 
+      userMailAddress, userPIN, count, 
+      IsEnabled)
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{usermailaddress,jdbcType=VARCHAR}, #{userpin,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{isenabled,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.User" >
+    update user
+    set UserName = #{username,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      userMailAddress = #{usermailaddress,jdbcType=VARCHAR},
+      userPIN = #{userpin,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      IsEnabled = #{isenabled,jdbcType=BIT}
+    where UserId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select UserId, UserName, Password, userMailAddress, userPIN, count, IsEnabled
+    from user
+    where UserId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select UserId, UserName, Password, userMailAddress, userPIN, count, IsEnabled
+    from user
+  </select>
+</mapper>

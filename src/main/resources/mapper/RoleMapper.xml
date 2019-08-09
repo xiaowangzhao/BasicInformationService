@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Role" >
+    <id column="RoleId" property="roleid" jdbcType="CHAR" />
+    <result column="Rname" property="rname" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from role
+    where RoleId = #{roleid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Role" >
+    insert into role (RoleId, Rname)
+    values (#{roleid,jdbcType=CHAR}, #{rname,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Role" >
+    update role
+    set Rname = #{rname,jdbcType=CHAR}
+    where RoleId = #{roleid,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select RoleId, Rname
+    from role
+    where RoleId = #{roleid,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select RoleId, Rname
+    from role
+  </select>
+</mapper>

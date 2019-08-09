@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Teacher" >
+    <id column="Tno" property="tno" jdbcType="VARCHAR" />
+    <result column="Tname" property="tname" jdbcType="VARCHAR" />
+    <result column="Tbirthday" property="tbirthday" jdbcType="VARCHAR" />
+    <result column="Tsex" property="tsex" jdbcType="VARCHAR" />
+    <result column="Tid" property="tid" jdbcType="VARCHAR" />
+    <result column="Tpstatus" property="tpstatus" jdbcType="VARCHAR" />
+    <result column="Tdept" property="tdept" jdbcType="VARCHAR" />
+    <result column="Tpost" property="tpost" jdbcType="VARCHAR" />
+    <result column="Tstudy" property="tstudy" jdbcType="VARCHAR" />
+    <result column="Temail" property="temail" jdbcType="VARCHAR" />
+    <result column="Tphone" property="tphone" jdbcType="VARCHAR" />
+    <result column="Tremark" property="tremark" jdbcType="VARCHAR" />
+    <result column="Tstart" property="tstart" jdbcType="VARCHAR" />
+    <result column="Tctime" property="tctime" jdbcType="VARCHAR" />
+    <result column="Tdegree" property="tdegree" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from teacher
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Teacher" >
+    insert into teacher (Tno, Tname, Tbirthday, 
+      Tsex, Tid, Tpstatus, 
+      Tdept, Tpost, Tstudy, 
+      Temail, Tphone, Tremark, 
+      Tstart, Tctime)
+    values (#{tno,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}, #{tbirthday,jdbcType=VARCHAR}, 
+      #{tsex,jdbcType=VARCHAR}, #{tid,jdbcType=VARCHAR}, #{tpstatus,jdbcType=VARCHAR}, 
+      #{tdept,jdbcType=VARCHAR}, #{tpost,jdbcType=VARCHAR}, #{tstudy,jdbcType=VARCHAR}, 
+      #{temail,jdbcType=VARCHAR}, #{tphone,jdbcType=VARCHAR}, #{tremark,jdbcType=VARCHAR}, 
+      #{tstart,jdbcType=VARCHAR}, #{tctime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateTeacher" parameterType="com.sdjzu.basicinformationservice.entity.Teacher" >
+    update teacher
+    <set>
+      <if  test="teacher.tname != null">Tname = #{teacher.tname},</if>
+      <if  test="teacher.tname != null">Tbirthday = #{teacher.tname},</if>
+      <if  test="teacher.tsex != null">Tsex = #{teacher.tsex},</if>
+      <if  test="teacher.tid != null">Tid = #{teacher.tid},</if>
+      <if  test="teacher.tpstatus != null">Tpstatus = #{teacher.tpstatus},</if>
+      <if  test="teacher.tdept != null">Tdept = #{teacher.tdept},</if>
+      <if  test="teacher.tpost != null">Tpost = #{teacher.tpost},</if>
+      <if  test="teacher.tstudy != null">Tstudy = #{teacher.tstudy},</if>
+      <if  test="teacher.temail != null">Temail = #{teacher.temail},</if>
+      <if  test="teacher.tphone != null">Tphone = #{teacher.tphone},</if>
+      <if  test="teacher.tremark != null">Tremark = #{teacher.tremark},</if>
+      <if  test="teacher.tstart != null">Tstart = #{teacher.tstart},</if>
+      <if  test="teacher.tctime != null">Tctime = #{teacher.tctime},</if>
+      <if  test="teacher.tdegree != null">Tdegree = #{teacher.tdegree}</if>
+    </set>
+    where Tno = #{teacher.tno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select Tno, Tname, Tbirthday, Tsex, Tid, Tpstatus, Tdept, Tpost, Tstudy, Temail, 
+    Tphone, Tremark, Tstart, Tctime
+    from teacher
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select Tno, Tname, Tbirthday, Tsex, Tid, Tpstatus, Tdept, Tpost, Tstudy, Temail, 
+    Tphone, Tremark, Tstart, Tctime
+    from teacher
+  </select>
+
+  <select id="selectTeaByTno" resultMap="BaseResultMap" >
+    select *
+    from teacher
+    where Tno=#{tno}
+  </select>
+    <select id="selectTnameByTno" resultType="String" >
+    select Tname
+    from teacher
+    where Tno=#{tno}
+  </select>
+
+  <select id="selectTno" resultMap="BaseResultMap" >
+    select Tno
+    from teacher
+  </select>
+
+  <select id="selectTnoTname" resultMap="BaseResultMap" >
+    select Tno, Tname
+    from teacher
+  </select>
+</mapper>

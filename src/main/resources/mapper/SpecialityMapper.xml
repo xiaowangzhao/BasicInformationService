@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.SpecialityMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Speciality" >
+    <id column="specid" property="specid" jdbcType="VARCHAR" />
+    <result column="specname" property="specname" jdbcType="VARCHAR" />
+    <result column="tno" property="tno" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from speciality
+    where specid = #{specid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Speciality" >
+    insert into speciality (specid, specname, tno
+      )
+    values (#{specid,jdbcType=VARCHAR}, #{specname,jdbcType=VARCHAR}, #{tno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Speciality" >
+    update speciality
+    set specname = #{specname,jdbcType=VARCHAR},
+      tno = #{tno,jdbcType=VARCHAR}
+    where specid = #{specid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select specid, specname, tno
+    from speciality
+    where specid = #{specid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select specid, specname, tno
+    from speciality
+  </select>
+  <select id="selectSpecname" resultType="String" >
+    select specname
+    from speciality
+    where specid=#{specid}
+  </select>
+  <select id="selectAllBySpecid" resultMap="BaseResultMap" >
+    select *
+    from speciality
+    where specid like "%"#{specid}"%" order by specid
+  </select>
+
+  <select id="selectSpecId" resultType="String" >
+    select specid
+    from speciality
+    where tno=#{tno}
+  </select>
+</mapper>

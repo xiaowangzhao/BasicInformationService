@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdjzu.basicinformationservice.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Student">
+    <id column="stuid" jdbcType="VARCHAR" property="stuid" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="ssex" jdbcType="CHAR" property="ssex" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="semail" jdbcType="VARCHAR" property="semail" />
+    <result column="sphone" jdbcType="VARCHAR" property="sphone" />
+    <result column="saddress" jdbcType="VARCHAR" property="saddress" />
+    <result column="sremark" jdbcType="VARCHAR" property="sremark" />
+    <result column="classname" jdbcType="VARCHAR" property="classname" />
+    <result column="specid" jdbcType="VARCHAR" property="specid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from student
+    where stuid = #{stuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Student">
+    insert into student (stuid, sname, ssex,
+      sid, semail, sphone, 
+      saddress, sremark, classname
+      )
+    values (#{stuid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{ssex,jdbcType=CHAR},
+      #{sid,jdbcType=VARCHAR}, #{semail,jdbcType=VARCHAR}, #{sphone,jdbcType=VARCHAR}, 
+      #{saddress,jdbcType=VARCHAR}, #{sremark,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByStuid" parameterType="com.sdjzu.basicinformationservice.entity.Student">
+    update student
+    <set>
+      <if test="student.sname != null">sname = #{student.sname},</if>
+      <if test="student.ssex != null">ssex = #{student.ssex},</if>
+      <if test="student.sid != null">sid = #{student.sid},</if>
+      <if test="student.semail != null">semail = #{student.semail},</if>
+      <if test="student.sphone != null">sphone = #{student.sphone},</if>
+      <if test="student.saddress != null">saddress = #{student.saddress},</if>
+      <if test="student.sremark != null">sremark = #{student.sremark},</if>
+      <if test="student.classname != null">classname = #{student.classname}</if>
+    </set>
+    where stuid = #{student.stuid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByStuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select stuid, sname, ssex, sid, semail, sphone, saddress, sremark, classname
+    from student
+    where stuid = #{stuid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select stuid, sname, ssex, sid, semail, sphone, saddress, sremark, classname
+    from student
+  </select>
+
+  <select id="selectAllStudent" resultMap="BaseResultMap">
+    select stuid, sname,classname
+    from student
+  </select>
+
+
+
+    <select id="getAllStudent" resultMap="BaseResultMap">
+        SELECT * FROM student
+    </select>
+
+    <!-- <select id="getNameAndClassById" parameterType="string" resultType="Map">
+         SELECT student.c_id,student.s_name FROM student WHERE
+         <if test="s_id!=null">
+             student.s_id = #{s_id}
+         </if>
+     </select>-->
+    <select id="selectByClassname" resultMap="BaseResultMap">
+    select stuid, sname, classname
+    from student
+    where classname like "%"#{classname}"%" and classname in(select classname from class where specid=#{specid})
+  </select>
+
+  <select id="selectStudent" resultMap="BaseResultMap">
+     select a.stuid, a.sname, a.ssex, a.sid, a.semail, a.sphone, a.saddress, a.sremark, a.classname,c.specid
+    from student a, class b, speciality c
+    where a.stuid =#{stuid} and a.classname = b.classname and b.specid = c.specid
+  </select>
+
+  <select id="selectAllInfo" resultMap="BaseResultMap">
+     select * from student where classname like "%"#{classname}"%"
+     and sname like "%"#{sname}"%"
+     and classname in (select classname from class where specid=#{specid})
+     order by classname,stuid
+  </select>
+
+
+  <!--王昭 2019/6/6 19:38:53-->
+  <select id = "getAllstuid"  resultMap = "Stuidmap">
+    select stuid from student
+  </select>
+
+  <resultMap id="Stuidmap" type="java.lang.String">
+    <result column="stuid" jdbcType="VARCHAR" property="stuid"></result>
+  </resultMap>
+
+</mapper>

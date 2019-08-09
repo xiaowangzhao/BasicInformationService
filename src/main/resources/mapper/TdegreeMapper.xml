@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.TdegreeMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Tdegree" >
+    <id column="Tno" property="tno" jdbcType="VARCHAR" />
+    <result column="Tdegree" property="tdegree" jdbcType="VARCHAR" />
+    <result column="Tspecialty" property="tspecialty" jdbcType="VARCHAR" />
+    <result column="Tgtime" property="tgtime" jdbcType="VARCHAR" />
+    <result column="scno" property="scno" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tdegree
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Tdegree" >
+    insert into tdegree (Tno, Tdegree, Tspecialty, 
+      Tgtime, scno)
+    values (#{tno,jdbcType=VARCHAR}, #{tdegree,jdbcType=VARCHAR}, #{tspecialty,jdbcType=VARCHAR}, 
+      #{tgtime,jdbcType=VARCHAR}, #{scno,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Tdegree" >
+    update tdegree
+    set Tdegree = #{tdegree,jdbcType=VARCHAR},
+      Tspecialty = #{tspecialty,jdbcType=VARCHAR},
+      Tgtime = #{tgtime,jdbcType=VARCHAR},
+      scno = #{scno,jdbcType=VARCHAR}
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select Tno, Tdegree, Tspecialty, Tgtime, scno
+    from tdegree
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select Tno, Tdegree, Tspecialty, Tgtime, scno
+    from tdegree
+  </select>
+</mapper>

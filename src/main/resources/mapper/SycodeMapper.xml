@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.SycodeMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Sycode" >
+    <id column="codeid" property="codeid" jdbcType="BIGINT" />
+    <result column="codeno" property="codeno" jdbcType="VARCHAR" />
+    <result column="codename" property="codename" jdbcType="VARCHAR" />
+    <result column="codevalue" property="codevalue" jdbcType="VARCHAR" />
+    <result column="codecontent" property="codecontent" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sycode
+    where codeid = #{codeid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Sycode" >
+    insert into sycode (codeid, codeno, codename, 
+      codevalue, codecontent)
+    values (#{codeid,jdbcType=BIGINT}, #{codeno,jdbcType=VARCHAR}, #{codename,jdbcType=VARCHAR}, 
+      #{codevalue,jdbcType=VARCHAR}, #{codecontent,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Sycode" >
+    update sycode
+    set codeno = #{codeno,jdbcType=VARCHAR},
+      codename = #{codename,jdbcType=VARCHAR},
+      codevalue = #{codevalue,jdbcType=VARCHAR},
+      codecontent = #{codecontent,jdbcType=VARCHAR}
+    where codeid = #{codeid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select codeid, codeno, codename, codevalue, codecontent
+    from sycode
+    where codeid = #{codeid,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select codeid, codeno, codename, codevalue, codecontent
+    from sycode
+  </select>
+</mapper>

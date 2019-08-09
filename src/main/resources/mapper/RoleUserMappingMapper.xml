@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.RoleUserMappingMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.RoleUserMapping" >
+    <id column="UserId" property="userid" jdbcType="CHAR" />
+    <id column="RoleId" property="roleid" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from role_user_mapping
+    where UserId = #{userid,jdbcType=CHAR}
+      and RoleId = #{roleid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.RoleUserMapping" >
+    insert into role_user_mapping (UserId, RoleId)
+    values (#{userid,jdbcType=CHAR}, #{roleid,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select UserId, RoleId
+    from role_user_mapping
+  </select>
+</mapper>

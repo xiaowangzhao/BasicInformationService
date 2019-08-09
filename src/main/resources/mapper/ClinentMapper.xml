@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdjzu.basicinformationservice.dao.ClinentMapper" >
+  <resultMap id="BaseResultMap" type="com.sdjzu.basicinformationservice.entity.Clinent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="clinent_name" property="clinentName" jdbcType="VARCHAR" />
+    <result column="clinent_id" property="clinentId" jdbcType="VARCHAR" />
+    <result column="clinent_secret" property="clinentSecret" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from clinent
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sdjzu.basicinformationservice.entity.Clinent" >
+    insert into clinent (id, clinent_name, clinent_id, 
+      clinent_secret)
+    values (#{id,jdbcType=BIGINT}, #{clinentName,jdbcType=VARCHAR}, #{clinentId,jdbcType=VARCHAR}, 
+      #{clinentSecret,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdjzu.basicinformationservice.entity.Clinent" >
+    update clinent
+    set clinent_name = #{clinentName,jdbcType=VARCHAR},
+      clinent_id = #{clinentId,jdbcType=VARCHAR},
+      clinent_secret = #{clinentSecret,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, clinent_name, clinent_id, clinent_secret
+    from clinent
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, clinent_name, clinent_id, clinent_secret
+    from clinent
+  </select>
+</mapper>
